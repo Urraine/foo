@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Urraine's Portfolio</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <style>
+    :root {
+      --primary-accent: #8B5C2A;    /* Brownie Gold */
+      --secondary-accent: #4B2E13;  /* Deep Brown */
+      --background: #F5EBDD;        /* Light Brownie */
+      --card-bg: #FFF8F0;           /* Soft Cream */
+      --choco: #6B3F19;            /* Chocolate */
+      --caramel: #C69C6D;           /* Caramel */
+      --cream: #FFF8F0;             /* Cream */
+      --pink: #F9D5D2;              /* Pink accent */
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #F5EBDD 60%, #FFF8F0 100%);
+      color: var(--secondary-accent);
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Abstract blobs and brownie shapes */
+    body::before, body::after {
+      content: "";
+      position: fixed;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.35;
+      transition: opacity 0.4s;
+    }
+    body::before {
+      top: -80px;
+      left: -80px;
+      width: 340px;
+      height: 340px;
+      background: radial-gradient(circle at 40% 40%, #e7cba0 70%, #8B5C2A 100%);
+      border-radius: 55% 45% 60% 40% / 60% 40% 55% 45%;
+      filter: blur(8px);
+    }
+    body::after {
+      bottom: -100px;
+      right: -100px;
+      width: 360px;
+      height: 360px;
+      background: radial-gradient(circle at 60% 60%, #f6e7d3 60%, #C69C6D 100%);
+      border-radius: 60% 40% 50% 50% / 50% 50% 60% 40%;
+      filter: blur(10px);
+    }
+    /* Decorative brownie SVGs */
+    .brownie-svg {
+      position: absolute;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0.7;
+    }
+    .brownie-svg.top-left {
+      top: 0;
+      left: 0;
+      width: 120px;
+      height: 120px;
+    }
+    .brownie-svg.bottom-right {
+      bottom: 0;
+      right: 0;
+      width: 140px;
+      height: 140px;
+    }
+
+    .container, .footer, .back-to-top {
+      position: relative;
+      z-index: 1;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 56px;
+      max-width: 1200px;
+      margin: 40px auto 0 auto;
+      padding: 56px 32px;
+      background: linear-gradient(120deg, rgba(255,255,255,0.96) 70%, rgba(255,249,220,0.92) 100%);
+      border-radius: 24px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    }
+
+    .left-panel {
+      flex: 1 1 320px;
+      max-width: 320px;
+      text-align: center;
+      background: linear-gradient(135deg, #f6e7d3 60%, #C69C6D 100%);
+      border: 4px solid #C69C6D;
+      border-radius: 22px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.10);
+      padding: 40px 24px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .left-panel img {
+      width: 130px;
+      height: 130px;
+      object-fit: cover;
+      border-radius: 50%;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+      margin-bottom: 18px;
+      border: 4px solid #C69C6D;
+      background: #fff;
+    }
+    .quote {
+      margin-top: 12px;
+      font-style: italic;
+      color: #C69C6D;
+      font-size: 1.15em;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      font-family: 'Pacifico', cursive;
+      background: linear-gradient(90deg, #FFF8F0 60%, #F9D5D2 100%);
+      border-radius: 12px;
+      padding: 8px 16px;
+      box-shadow: 0 2px 8px rgba(198,156,109,0.08);
+      display: inline-block;
+    }
+
+    .right-panel {
+      flex: 2 1 600px;
+      background: rgba(255,248,240,0.98);
+      border-radius: 22px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.10);
+      padding: 40px 32px;
+      margin-bottom: 24px;
+      min-width: 320px;
+      position: relative;
+    }
+    .right-panel h1 {
+      font-size: 2.6em;
+      font-weight: 700;
+      color: var(--primary-accent);
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+      font-family: 'Pacifico', cursive;
+      text-shadow: 0 2px 8px #C69C6D44;
+    }
+    nav {
+      margin-bottom: 18px;
+    }
+    nav a {
+      margin-right: 24px;
+      text-decoration: none;
+      color: var(--primary-accent);
+      font-weight: bold;
+      font-size: 1.08em;
+      transition: color 0.2s;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 2px;
+    }
+    nav a:hover {
+      color: #C69C6D;
+      border-bottom: 2px solid #C69C6D;
+      text-shadow: 0 2px 8px rgba(139,92,42,0.12);
+      transform: translateY(-2px) scale(1.05);
+    }
+
+    .highlight {
+      font-weight: bold;
+      background: linear-gradient(90deg, #FFF8F0 60%, #f6e7d3 100%);
+      border-radius: 6px;
+      padding: 2px 6px;
+      color: var(--choco);
+    }
+
+    .divider {
+      border: none;
+      height: 2px;
+      background: linear-gradient(90deg, #C69C6D 0%, #f6e7d3 100%);
+      margin: 32px 0;
+      opacity: 0.3;
+    }
+
+    .section, .skills, .hobbies, .contact {
+      background: rgba(255,248,240,0.98);
+      box-shadow: 0 4px 24px rgba(139,92,42,0.10), 0 1.5px 8px rgba(75,46,19,0.07);
+      border-radius: 18px;
+      padding: 32px 26px;
+      margin-top: 32px;
+      margin-bottom: 32px;
+      transition: box-shadow 0.2s, transform 0.2s;
+      position: relative;
+    }
+    .section:hover, .skills:hover, .hobbies:hover, .contact:hover {
+      box-shadow: 0 8px 32px rgba(198,156,109,0.18);
+      transform: translateY(-4px) scale(1.02);
+    }
+
+    .section h2, .skills h2, .hobbies h2, .contact h2 {
+      font-size: 1.6em;
+      font-weight: 700;
+      color: var(--primary-accent);
+      margin-bottom: 18px;
+      letter-spacing: 1px;
+      font-family: 'Pacifico', cursive;
+      text-shadow: 0 2px 8px #C69C6D44;
+    }
+
+    .right-panel p, .section p, .skills ul li, .hobbies ul li, .contact p {
+      font-size: 1.08em;
+      font-weight: 400;
+      color: #4B2E13;
+      line-height: 1.7;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    ul li::before {
+      content: "🍫 ";
+      color: #C69C6D;
+      font-weight: bold;
+    }
+
+    .skills-hobbies-container {
+      display: flex;
+      flex-direction: row;
+      gap: 60px;
+      margin-top: 32px;
+      margin-bottom: 32px;
+    }
+    .skills ul, .hobbies ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+    .skills ul li, .hobbies ul li {
+      font-size: 1.1em;
+      margin-bottom: 12px;
+      color: #4B2E13;
+    }
+
+    .skill-icon, .hobby-icon {
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+      text-align: center;
+      margin-right: 10px;
+      color: var(--primary-accent);
+      vertical-align: middle;
+      font-size: 1.25em;
+      background: #FFF8F0;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px #C69C6D22;
+    }
+    .hobby-icon {
+      color: #4B2E13;
+      background: #FFF8F0;
+      border-radius: 50%;
+      padding: 4px;
+      margin-right: 10px;
+      font-size: 1.15em;
+      box-shadow: 0 2px 8px #C69C6D22;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-size: 0.95em;
+      font-weight: 600;
+      margin-left: 12px;
+      color: #FFF8F0;
+      background: var(--choco);
+      vertical-align: middle;
+      box-shadow: 0 2px 8px #C69C6D22;
+    }
+    .badge.advanced {
+      background: var(--primary-accent);
+      color: #FFF8F0;
+    }
+    .badge.intermediate {
+      background: #4B2E13;
+      color: #FFF8F0;
+    }
+    .badge.beginner {
+      background: #FFF8F0;
+      color: var(--primary-accent);
+      border: 1px solid var(--primary-accent);
+    }
+
+    .progress-bar {
+      width: 120px;
+      height: 8px;
+      background: #eee;
+      border-radius: 6px;
+      display: inline-block;
+      margin-left: 12px;
+      vertical-align: middle;
+      position: relative;
+      top: -2px;
+      box-shadow: 0 2px 8px #C69C6D22;
+    }
+    .progress {
+      height: 100%;
+      border-radius: 6px;
+      background: var(--primary-accent);
+      transition: width 0.4s;
+    }
+    .progress.advanced { width: 100%; }
+    .progress.intermediate { width: 70%; }
+    .progress.beginner { width: 40%; }
+
+    .button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 28px;
+      background: linear-gradient(90deg, #C69C6D 60%, #8B5C2A 100%);
+      color: #FFF8F0;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1em;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      transition: background 0.2s, box-shadow 0.2s, filter 0.2s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+      font-family: 'Roboto', Arial, sans-serif;
+    }
+    .button:hover {
+      background: linear-gradient(90deg, #8B5C2A 60%, #C69C6D 100%);
+      box-shadow: 0 4px 24px rgba(139,92,42,0.18), 0 0 12px 2px #C69C6D88;
+      filter: drop-shadow(0 0 8px #C69C6D88);
+      transform: translateY(-2px) scale(1.04);
+    }
+
+    /* Ripple effect for buttons */
+    .ripple {
+      position: relative;
+      overflow: hidden;
+    }
+    .ripple-effect {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(198,156,109,0.35);
+      transform: scale(0);
+      animation: ripple-anim 0.6s linear;
+      pointer-events: none;
+      width: 120px;
+      height: 120px;
+      left: 50%;
+      top: 50%;
+      margin-left: -60px;
+      margin-top: -60px;
+      z-index: 2;
+    }
+    @keyframes ripple-anim {
+      to {
+        transform: scale(2.5);
+        opacity: 0;
+      }
+    }
+
+    .footer {
+      text-align: center;
+      padding: 18px 0 10px 0;
+      font-size: 1em;
+      color: #4B2E13;
+      background: #F5EBDD;
+      margin-top: 32px;
+      border-top: 1px solid #C69C6D;
+      font-family: 'Pacifico', cursive;
+      letter-spacing: 1px;
+    }
+
+    .back-to-top {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      background: #C69C6D;
+      color: #FFF8F0;
+      border-radius: 50%;
+      padding: 12px 16px;
+      font-size: 1.4em;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+      text-align: center;
+      text-decoration: none;
+      opacity: 0.7;
+      transition: opacity 0.2s, box-shadow 0.2s, transform 0.2s;
+      z-index: 999;
+    }
+    .back-to-top:hover {
+      opacity: 1;
+      box-shadow: 0 4px 16px rgba(139,92,42,0.18), 0 0 12px 2px #C69C6D88;
+      filter: drop-shadow(0 0 8px #C69C6D88);
+      transform: scale(1.1);
+    }
+
+    /* Sprinkle animation: animated dots in corners */
+    .sprinkle {
+      position: absolute;
+      border-radius: 50%;
+      background: #C69C6D;
+      opacity: 0.7;
+      animation: sprinkleMove 2.5s infinite alternate;
+    }
+    .sprinkle.s1 { top: 30px; left: 40px; width: 12px; height: 12px; animation-delay: 0s; }
+    .sprinkle.s2 { top: 80px; left: 90px; width: 8px; height: 8px; animation-delay: 0.5s; }
+    .sprinkle.s3 { bottom: 40px; right: 60px; width: 10px; height: 10px; animation-delay: 1s; }
+    .sprinkle.s4 { bottom: 90px; right: 120px; width: 7px; height: 7px; animation-delay: 1.5s; }
+
+    @keyframes sprinkleMove {
+      0% { transform: scale(1) translateY(0); }
+      100% { transform: scale(1.2) translateY(-10px); }
+    }
+
+    /* Button wiggle animation on hover */
+    .button:hover {
+      animation: wiggle 0.4s;
+    }
+    @keyframes wiggle {
+      0% { transform: scale(1) rotate(0deg);}
+      25% { transform: scale(1.05) rotate(-6deg);}
+      50% { transform: scale(0.98) rotate(6deg);}
+      75% { transform: scale(1.04) rotate(-3deg);}
+      100% { transform: scale(1) rotate(0deg);}
+    }
+
+    /* Fade-in for SVG brownies */
+    .brownie-svg {
+      opacity: 0;
+      animation: fadeInBrownie 1.2s forwards;
+    }
+    .brownie-svg.top-left { animation-delay: 0.2s; }
+    .brownie-svg.bottom-right { animation-delay: 0.4s; }
+    @keyframes fadeInBrownie {
+      to { opacity: 0.7; }
+    }
+
+    /* Section fade-in animation */
+    .section, .skills, .hobbies, .contact, .left-panel, .right-panel {
+      opacity: 0;
+      transform: translateY(40px) scale(0.98);
+      animation: fadeUp 1s forwards;
+      animation-delay: 0.2s;
+    }
+    .left-panel { animation-delay: 0.3s; }
+    .right-panel { animation-delay: 0.4s; }
+    .section { animation-delay: 0.5s; }
+    .skills { animation-delay: 0.6s; }
+    .hobbies { animation-delay: 0.7s; }
+    .contact { animation-delay: 0.8s; }
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Add this below your existing CSS for extra animations */
+
+    /* Fade-in and slide-up for main sections and panels */
+    .section, .skills, .hobbies, .contact, .left-panel, .right-panel {
+      opacity: 0;
+      transform: translateY(40px) scale(0.98);
+      animation: fadeUp 1s forwards;
+    }
+    .left-panel { animation-delay: 0.2s; }
+    .right-panel { animation-delay: 0.3s; }
+    .section { animation-delay: 0.4s; }
+    .skills { animation-delay: 0.5s; }
+    .hobbies { animation-delay: 0.6s; }
+    .contact { animation-delay: 0.7s; }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Card lift and shadow on hover */
+    .section:hover, .skills:hover, .hobbies:hover, .contact:hover, .left-panel:hover, .right-panel:hover {
+      box-shadow: 0 16px 40px rgba(198,156,109,0.22);
+      transform: translateY(-8px) scale(1.03);
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+
+    /* Button bounce on hover */
+    .button:hover {
+      animation: bounce 0.4s;
+    }
+
+    @keyframes bounce {
+      0%   { transform: scale(1); }
+      30%  { transform: scale(1.08); }
+      50%  { transform: scale(0.98); }
+      70%  { transform: scale(1.04); }
+      100% { transform: scale(1); }
+    }
+
+    /* Sprinkle dots wiggle */
+    .sprinkle {
+      animation: sprinkleMove 2.5s infinite alternate;
+    }
+    @keyframes sprinkleMove {
+      0% { transform: scale(1) translateY(0); }
+      100% { transform: scale(1.2) translateY(-10px); }
+    }
+
+    /* Back-to-top fade-in and pulse on hover */
+    .back-to-top {
+      opacity: 0;
+      animation: fadeInTop 1.2s forwards 1s;
+    }
+    @keyframes fadeInTop {
+      to { opacity: 0.7; }
+    }
+    .back-to-top:hover {
+      animation: pulse 0.6s;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 2px 8px rgba(107,63,25,0.12); }
+      50% { box-shadow: 0 8px 32px #C69C6D88; }
+      100% { box-shadow: 0 2px 8px rgba(107,63,25,0.12); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 900px) {
+      .container {
+        flex-direction: column;
+        align-items: center;
+        padding: 18px;
+        gap: 24px;
+      }
+      .left-panel, .right-panel, .skills, .hobbies, .section {
+        max-width: 100%;
+        margin-bottom: 18px;
+        padding: 24px 12px;
+        border-radius: 14px;
+      }
+      .skills-hobbies-container {
+        flex-direction: column;
+        gap: 18px;
+        align-items: stretch;
+      }
+    }
+    @media (max-width: 600px) {
+      .container {
+        flex-direction: column;
+        padding: 8px;
+        gap: 18px;
+        margin-top: 12px;
+        border-radius: 12px;
+      }
+      .left-panel, .right-panel, .section, .skills, .hobbies {
+        max-width: 100%;
+        padding: 16px 6px;
+        margin-bottom: 12px;
+        border-radius: 12px;
+      }
+      .skills-hobbies-container {
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+      }
+      .right-panel h1 {
+        font-size: 2em;
+      }
+      .section h2, .skills h2, .hobbies h2, .contact h2 {
+        font-size: 1.2em;
+      }
+      .back-to-top {
+        bottom: 12px;
+        right: 12px;
+        font-size: 1.1em;
+        padding: 8px 10px;
+      }
+    }
+
+    /* Dark Mode Styles */
+    body.dark-mode {
+      background: linear-gradient(135deg, #4B2E13 60%, #6B3F19 100%);
+      color: #FFF8F0;
+    }
+    body.dark-mode .container {
+      background: linear-gradient(120deg, #6B3F19 70%, #4B2E13 100%);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.22);
+    }
+    body.dark-mode .left-panel,
+    body.dark-mode .right-panel,
+    body.dark-mode .section,
+    body.dark-mode .skills,
+    body.dark-mode .hobbies,
+    body.dark-mode .contact {
+      background: #3a2412;
+      color: #FFF8F0;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.22);
+    }
+    body.dark-mode .divider {
+      background: linear-gradient(90deg, #8B5C2A 0%, #C69C6D 100%);
+      opacity: 0.5;
+    }
+    body.dark-mode nav a,
+    body.dark-mode .highlight,
+    body.dark-mode .skill-icon,
+    body.dark-mode .hobby-icon,
+    body.dark-mode .badge,
+    body.dark-mode .button,
+    body.dark-mode .back-to-top {
+      color: #FFF8F0 !important;
+      background: #8B5C2A !important;
+      border-color: #C69C6D !important;
+    }
+    body.dark-mode .button:hover,
+    body.dark-mode .back-to-top:hover {
+      background: #C69C6D !important;
+      color: #4B2E13 !important;
+    }
+    body.dark-mode .progress {
+      background: #C69C6D;
+    }
+    body.dark-mode .footer {
+      background: #4B2E13;
+      color: #FFF8F0;
+      border-top: 1px solid #8B5C2A;
+    }
+    body.dark-mode .sprinkle {
+      background: #8B5C2A;
+    }
+  </style>
+</head>
+<body>
+  <!-- Dark Mode Toggle Button -->
+  <button id="darkModeToggle"
+    aria-label="Toggle dark mode"
+    style="position: fixed; top: 24px; right: 24px; z-index: 1000; background: #C69C6D; color: #FFF8F0; border: none; border-radius: 50px; padding: 10px 22px; font-size: 1.1em; font-weight: bold; box-shadow: 0 2px 8px rgba(107,63,25,0.12); cursor: pointer; transition: background 0.2s, color 0.2s;">
+    🍫 Dark Mode
+  </button>
+
+  <main class="container" role="main">
+    <!-- LEFT PANEL -->
+    <aside class="left-panel" data-aos="fade-right" aria-label="Profile">
+      <img src="./Urraine&#39;s Portfolio_files/image002.png" alt="Renalyn Pagatpat profile photo">
+      <div class="quote" aria-label="Personal motto">Life goes on ❤️</div>
+    </aside>
+
+    <!-- RIGHT PANEL -->
+    <section class="right-panel" data-aos="fade-left" aria-label="Main content">
+      <h1 tabindex="0">Hi, I'm Urraine!</h1>
+      <p>Welcome to my world! 🌐</p>
+      <nav aria-label="Main navigation">
+        <a href="#" aria-label="About section">About</a>
+        <a href="#" aria-label="Contact section">Contact</a>
+      </nav>
+
+      <section class="section" data-aos="fade-up" aria-labelledby="about-me-heading">
+        <h2 id="about-me-heading"><i class="fa-solid fa-user"></i> About Me</h2>
+        <hr class="divider">
+        <p>
+          <span class="highlight">I’m Renalyn Pagatpat</span>, a 4th-year Computer Technology student at Mandaue City College. Currently completing my OJT at <span class="highlight">N-PAX Corporation</span>, I specialize in documentation within a software development environment.
+        </p>
+        <p>
+          Skilled in <span class="highlight">C#</span>, <span class="highlight">HTML</span>, and <span class="highlight">SQL</span>, I’m passionate about problem-solving and turning ideas into meaningful projects.
+        </p>
+      </section>
+
+      <!-- Wavy SVG Divider -->
+      <div class="wave-divider" data-aos="fade-in" aria-hidden="true">
+        <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+          <path d="M0,40 C480,120 960,0 1440,80 L1440,120 L0,120 Z" fill="#C69C6D"/>
+        </svg>
+      </div>
+
+      <section class="skills-hobbies-container" aria-label="Skills and Hobbies">
+        <section class="skills section" data-aos="zoom-in-up" aria-labelledby="skills-heading">
+          <h2 id="skills-heading"><i class="fa-solid fa-code"></i> Skills</h2>
+          <ul>
+            <li>
+              <span class="skill-icon" aria-hidden="true"><i class="fa-brands fa-microsoft"></i></span>
+              <span>C# Programming</span>
+              <span class="badge advanced" aria-label="Advanced level">Advanced</span>
+              <div class="progress-bar" aria-label="Skill level: Advanced"><div class="progress advanced"></div></div>
+            </li>
+            <li>
+              <span class="skill-icon" aria-hidden="true"><i class="fa-brands fa-html5"></i></span>
+              <span>HTML &amp; CSS</span>
+              <span class="badge intermediate" aria-label="Intermediate level">Intermediate</span>
+              <div class="progress-bar" aria-label="Skill level: Intermediate"><div class="progress intermediate"></div></div>
+            </li>
+            <li>
+              <span class="skill-icon" aria-hidden="true"><i class="fa-solid fa-database"></i></span>
+              <span>SQL &amp; Databases</span>
+              <span class="badge intermediate" aria-label="Intermediate level">Intermediate</span>
+              <div class="progress-bar" aria-label="Skill level: Intermediate"><div class="progress intermediate"></div></div>
+            </li>
+            <li>
+              <span class="skill-icon" aria-hidden="true"><i class="fa-solid fa-lightbulb"></i></span>
+              <span>Problem Solving</span>
+              <span class="badge advanced" aria-label="Advanced level">Advanced</span>
+              <div class="progress-bar" aria-label="Skill level: Advanced"><div class="progress advanced"></div></div>
+            </li>
+            <li>
+              <span class="skill-icon" aria-hidden="true"><i class="fa-solid fa-file-lines"></i></span>
+              <span>Technical Writing</span>
+              <span class="badge intermediate" aria-label="Intermediate level">Intermediate</span>
+              <div class="progress-bar" aria-label="Skill level: Intermediate"><div class="progress intermediate"></div></div>
+            </li>
+            <li>
+              <span class="skill-icon" aria-hidden="true"><i class="fa-solid fa-globe"></i></span>
+              <span>Web Development</span>
+              <span class="badge beginner" aria-label="Beginner level">Beginner</span>
+              <div class="progress-bar" aria-label="Skill level: Beginner"><div class="progress beginner"></div></div>
+            </li>
+          </ul>
+        </section>
+        <section class="hobbies section" data-aos="zoom-in-up" data-aos-delay="100" aria-labelledby="hobbies-heading">
+          <h2 id="hobbies-heading"><i class="fa-solid fa-heart"></i> Hobbies</h2>
+          <ul>
+            <li>
+              <span class="hobby-icon" aria-hidden="true"><i class="fa-solid fa-book-open"></i></span>
+              <span>Reading &amp; Journaling</span>
+            </li>
+            <li>
+              <span class="hobby-icon" aria-hidden="true"><i class="fa-solid fa-mug-hot"></i></span>
+              <span>Café-hopping</span>
+            </li>
+            <li>
+              <span class="hobby-icon" aria-hidden="true"><i class="fa-solid fa-flask"></i></span>
+              <span>Exploring Tech Tools</span>
+            </li>
+            <li>
+              <span class="hobby-icon" aria-hidden="true"><i class="fa-solid fa-paint-brush"></i></span>
+              <span>Aesthetic decorating</span>
+            </li>
+          </ul>
+        </section>
+      </section>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" data-aos="fade-up" aria-labelledby="contact-heading">
+      <h2 id="contact-heading">Contact Me</h2>
+      <p><i class="fa-solid fa-envelope"></i> <a href="mailto:mangroverena@gmail.com" aria-label="Email Renalyn Pagatpat">mangroverena@gmail.com</a></p>
+      <p><i class="fa-brands fa-github"></i> <a href="https://github.com/Urraine" target="_blank" aria-label="Visit Urraine's GitHub">github.com/Urraine</a></p>
+      <a class="button ripple" href="mailto:mangroverena@gmail.com" aria-label="Send email to Renalyn Pagatpat">Say ohaiyo 👋</a>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    &copy; 2025 Urraine Pagatpat. All rights reserved. Made with <span style="color:#C69C6D;" aria-hidden="true">&#x1F36B;</span>
+  </footer>
+
+  <a href="#" class="back-to-top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></a>
+
+  <!-- AOS Animation JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 900,
+      once: true
+    });
+  </script>
+  <!-- Ripple effect for buttons -->
+  <script>
+    document.querySelectorAll('.ripple').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        const circle = document.createElement('span');
+        circle.classList.add('ripple-effect');
+        const rect = btn.getBoundingClientRect();
+        circle.style.left = `${e.clientX - rect.left}px`;
+        circle.style.top = `${e.clientY - rect.top}px`;
+        btn.appendChild(circle);
+        setTimeout(() => circle.remove(), 600);
+      });
+    });
+  </script>
+  <script>
+    // Dark mode toggle logic
+    const toggleBtn = document.getElementById('darkModeToggle');
+    toggleBtn.addEventListener('click', function() {
+      document.body.classList.toggle('dark-mode');
+      toggleBtn.textContent = document.body.classList.contains('dark-mode') ? '🍫 Light Mode' : '🍫 Dark Mode';
+    });
+  </script>
+</body>
+</html>
